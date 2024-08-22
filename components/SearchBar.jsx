@@ -1,46 +1,74 @@
 import React, { useState, useEffect } from 'react'
 import { View, TextInput, FlatList, TouchableOpacity, Text, StyleSheet } from 'react-native'
+import axios from 'axios'
 
-const LOCATIONSGUESS = [
-    "Europe/London","Asia (Middle East) /Israel" , "America/New_York", "Asia/Tokyo", "Australia/Sydney",
-    "Africa/Cairo", "Europe/Paris", "America/Los_Angeles", "Asia/Dubai"
+const INITIAL_LOCATIONS = [
+    "Europe/London", "America/New_York"
 ]
 
 export default function SearchBar({ onLocationSelect }) {
     const [search, setSearch] = useState('')
-    const [filteredLocations, setFilteredLocations] = useState(LOCATIONSGUESS)
+    const [locations, setLocations] = useState(INITIAL_LOCATIONS)
+    const [selectedLocation, setSelectedLocation] = useState(null)
 
     useEffect(() => {
-        setFilteredLocations(
-            LOCATIONSGUESS.filter(location =>
-                location.toLowerCase().includes(search.toLowerCase())
-            )
-        )
+        if (search.length > 2) {
+            fetchLocations()
+            // console.log(search);
+        } else if (search.length === 0) {
+            setLocations(INITIAL_LOCATIONS)
+            setSelectedLocation(null)
+        }
     }, [search])
+
+  
+    
+    async function fetchLocations() {
+        try {
+            const response = await axios.get(`http://worldtimeapi.org/api/timezone/${search}`)
+            setLocations(response.data.slice(0, 3))
+        } catch (error) {
+            console.error('Error fetching locations:', error)
+            setLocations([])
+        }
+    }
+
+    function handleLocationSelect(location) {
+        setSelectedLocation(location)
+        onLocationSelect(location)
+        setSearch(location)
+    }
 
     return (
         <View style={styles.container}>
             <TextInput
                 style={styles.input}
-                placeholder="Search location"
+                placeholder="Search location..."
                 value={search}
                 onChangeText={setSearch}
             />
-            <FlatList
-                data={filteredLocations}
-                renderItem={({ item }) => (
-                    <TouchableOpacity
-                        style={styles.item}
-                        onPress={() => {
-                            onLocationSelect(item)
-                            setSearch('')
-                        }}
-                    >
-                        <Text>{item}</Text>
-                    </TouchableOpacity>
-                )}
-                keyExtractor={item => item}
-            />
+            {!selectedLocation && (
+                <FlatList
+                    data={locations}
+                    renderItem={({ item }) => (
+                        <TouchableOpacity
+                            style={styles.item}
+                            onPress={() => handleLocationSelect(item)}
+                        >
+                            <Text>{item}</Text>
+                        </TouchableOpacity>
+                    )}
+                    keyExtractor={item => item}
+                />
+            )}
+            {selectedLocation && (
+                <TouchableOpacity
+                    style={styles.selectedItem}
+                    onPress={() => setSelectedLocation(null)}
+                >
+                    <Text>{selectedLocation}</Text>
+                </TouchableOpacity>
+            )}
         </View>
     )
 }
@@ -61,5 +89,11 @@ const styles = StyleSheet.create({
         padding: 10,
         borderBottomWidth: 1,
         borderBottomColor: '#ccc',
+    },
+    selectedItem: {
+        padding: 10,
+        backgroundColor: '#e0e0e0',
+        borderRadius: 5,
+        marginTop: 5,
     },
 })

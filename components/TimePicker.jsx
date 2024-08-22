@@ -1,26 +1,49 @@
-import React from 'react';
+// components/TimePicker.js
+import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 
-export default function TimePicker() {
-    return (
-        <View style={styles.container}>
-            <Text style={styles.label}>Enter time</Text>
-            <View style={styles.timeInputs}>
-                <TextInput style={styles.input} placeholder="20" />
-                <Text style={styles.colon}>:</Text>
-                <TextInput style={styles.input} placeholder="00" />
-            </View>
-            <View style={styles.buttons}>
-                <TouchableOpacity style={styles.button}>
-                    <Text>OK</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.button}>
-                    <Text>Cancel</Text>
-                </TouchableOpacity>
-            </View>
-        </View>
-    );
+export default function TimePicker({ onGuessSubmit }) {
+  const [hour, setHour] = useState('');
+  const [minute, setMinute] = useState('');
+
+  const handleSubmit = () => {
+    onGuessSubmit(`${hour.padStart(2, '0')}:${minute.padStart(2, '0')}`);
+  };
+
+  return (
+    <View style={styles.container}>
+      <Text style={styles.label}>Enter time</Text>
+      <View style={styles.timeInputs}>
+        <TextInput 
+          style={styles.input} 
+          placeholder="HH"
+          value={hour}
+          onChangeText={setHour}
+          keyboardType="numeric"
+          maxLength={2}
+        />
+        <Text style={styles.colon}>:</Text>
+        <TextInput 
+          style={styles.input} 
+          placeholder="MM"
+          value={minute}
+          onChangeText={setMinute}
+          keyboardType="numeric"
+          maxLength={2}
+        />
+      </View>
+      <View style={styles.buttons}>
+        <TouchableOpacity style={styles.button} onPress={() => { setHour(''); setMinute(''); }}>
+          <Text>Cancel</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.button} onPress={handleSubmit}>
+          <Text>OK</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
+  );
 }
+
 
 const styles = StyleSheet.create({
     container: {
