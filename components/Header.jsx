@@ -1,5 +1,5 @@
-import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import React from 'react'
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
 
 export default function Header() {
   return (
@@ -14,7 +14,7 @@ export default function Header() {
         </TouchableOpacity>
       </View>
     </View>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
@@ -23,7 +23,10 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     padding: 10,
+    paddingTop:50,
     backgroundColor: '#f0f0f0',
+
+    
   },
   logo: {
     fontSize: 24,
@@ -39,4 +42,4 @@ const styles = StyleSheet.create({
     backgroundColor: '#ddd',
     borderRadius: 5,
   },
-});
+})
