@@ -1,10 +1,10 @@
 import React from 'react'
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
+import { View, Text, TouchableOpacity, StyleSheet,  Image  } from 'react-native'
 
 export default function Header() {
   return (
     <View style={styles.header}>
-      <Text style={styles.logo}>JOOBA</Text>
+      <Image source={require('../assets/imgs/logo.png')} style={styles.logo} />
       <View style={styles.languageToggle}>
         <TouchableOpacity style={styles.langButton}>
           <Text>ENG</Text>
@@ -29,9 +29,9 @@ const styles = StyleSheet.create({
     
   },
   logo: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: 'purple',
+    width: 100,  
+    height: 40,  
+    resizeMode: 'contain', 
   },
   languageToggle: {
     flexDirection: 'row',

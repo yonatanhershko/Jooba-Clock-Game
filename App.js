@@ -5,6 +5,7 @@ import axios from 'axios'
 import Header from './components/Header.jsx'
 import SearchBar from './components/SearchBar.jsx'
 import TimePicker from './components/TimePicker.jsx'
+import WinList from './components/WinList.jsx'
 
 export default function App() {
   const [selectedLocation, setSelectedLocation] = useState(null)
@@ -31,8 +32,10 @@ export default function App() {
 
       if (currentHour === guessedHour && currentMinute === guessedMinute) {
         Alert.alert("Correct!", "You guessed the time correctly!")
-        setWins([...wins, { time: guessedTime, location: selectedLocation }])
+        console.log('test')
+        // setWins([...wins, { time: guessedTime, location: selectedLocation }])
       } else {
+        console.log('nop')
         Alert.alert("Incorrect", `The correct time was ${currentHour}:${currentMinute}`)
       }
     } catch (error) {
@@ -53,6 +56,7 @@ export default function App() {
         </View>
       </View>
       <StatusBar style="auto" />
+      <WinList wins={wins} />
     </View>
   )
 }

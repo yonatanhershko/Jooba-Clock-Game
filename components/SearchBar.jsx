@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { View, TextInput, FlatList, TouchableOpacity, Text, StyleSheet } from 'react-native'
+import TextField from '@mui/material/TextField';
 import axios from 'axios'
 
 const INITIAL_LOCATIONS = [
@@ -41,11 +42,19 @@ export default function SearchBar({ onLocationSelect }) {
 
     return (
         <View style={styles.container}>
-            <TextInput
-                style={styles.input}
-                placeholder="Search location..."
+               <TextField
+                id="outlined-basic"
+                label="Search location"
+               
                 value={search}
-                onChangeText={setSearch}
+                onChange={(e) => setSearch(e.target.value)}
+                style={styles.input}
+                InputProps={{
+                    style: { borderColor: 'purple' },
+                }}
+                InputLabelProps={{
+                    style: { color: 'purple' },
+                }}
             />
             {!selectedLocation && (
                 <FlatList
@@ -79,11 +88,8 @@ const styles = StyleSheet.create({
         marginBottom: 20,
     },
     input: {
-        borderWidth: 1,
-        borderColor: '#ccc',
-        borderRadius: 5,
-        padding: 10,
-        fontSize: 16,
+        width: '100%',
+        marginBottom: 10,
     },
     item: {
         padding: 10,
