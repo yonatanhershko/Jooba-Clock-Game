@@ -1,43 +1,41 @@
 import React, { useState, useEffect, useCallback } from 'react'
-import { View, TextInput, FlatList, TouchableOpacity, Text, StyleSheet } from 'react-native'
-import TextField from '@mui/material/TextField';
+import { View, FlatList, TouchableOpacity, Text, StyleSheet, TextInput } from 'react-native'
+// import TextField from '@mui/material/TextField'
 import axios from 'axios'
-import { debounce } from 'lodash';
+import { debounce } from 'lodash'
 
-const INITIAL_LOCATIONS = [
-    "Europe/London", "America/New_York"
-]
+const INITIAL_LOCATIONS = ["Europe/London", "America/New_York"]
+const API_KEY = '71ce652a85d84a44b380069c8be0b9e2'
 
 export default function SearchBar({ onLocationSelect }) {
-    const [search, setSearch] = useState('');
-    const [locations, setLocations] = useState(INITIAL_LOCATIONS);
-    const [selectedLocation, setSelectedLocation] = useState(null);
+    const [search, setSearch] = useState('')
+    const [locations, setLocations] = useState(INITIAL_LOCATIONS)
+    const [selectedLocation, setSelectedLocation] = useState(null)
+    const [isFocused, setIsFocused] = useState(false)
 
     const debouncedFetchLocations = useCallback(
         debounce(async (searchTerm) => {
             if (searchTerm.length > 2) {
                 try {
-                    const response = await axios.get(`http://worldtimeapi.org/api/timezone/${searchTerm}`)
-                    const timezoneData = response.data.timezone;
-                    const joinedTimezones = timezoneData;
-                    console.log(response.data);
-                    setLocations([joinedTimezones])
+                    const response = await axios.get(`https://api.ipgeolocation.io/timezone?apiKey=${API_KEY}&location=${searchTerm}`)
+                    const timezoneData = response.data.timezone
+                    setLocations([timezoneData])
                 } catch (error) {
-                    console.error('Error fetching locations:', error);
-                    setLocations([]);
+                    console.error('Error fetching locations:', error)
+                    setLocations([])
                 }
             } else if (searchTerm.length === 0) {
-                setLocations(INITIAL_LOCATIONS);
-                setSelectedLocation(null);
+                setLocations(INITIAL_LOCATIONS)
+                setSelectedLocation(null)
             }
-        }, 2000),
+        }, 1000), // Reduced debounce time to 1 second
         []
-    );
+    )
 
     useEffect(() => {
-        debouncedFetchLocations(search);
-        return () => debouncedFetchLocations.cancel(); // Cancel the debounce on unmount
-    }, [search, debouncedFetchLocations]);
+        debouncedFetchLocations(search)
+        return () => debouncedFetchLocations.cancel()
+    }, [search, debouncedFetchLocations])
 
     function handleLocationSelect(location) {
         setSelectedLocation(location)
@@ -47,19 +45,16 @@ export default function SearchBar({ onLocationSelect }) {
 
     return (
         <View style={styles.container}>
-            <TextField
-                id="outlined-basic"
-                label="Search location"
-
+        <TextInput
+                style={[
+                    styles.input,
+                    isFocused && styles.inputFocused,
+                ]}
+                placeholder="Search location"
                 value={search}
-                onChange={(e) => setSearch(e.target.value)}
-                style={styles.input}
-                InputProps={{
-                    style: { borderColor: 'purple' },
-                }}
-                InputLabelProps={{
-                    style: { color: 'purple' },
-                }}
+                onChangeText={setSearch}
+                onFocus={() => setIsFocused(true)}
+                onBlur={() => setIsFocused(false)}
             />
             {!selectedLocation && (
                 <FlatList
@@ -87,6 +82,7 @@ export default function SearchBar({ onLocationSelect }) {
     )
 }
 
+
 const styles = StyleSheet.create({
     container: {
         width: '100%',
@@ -94,17 +90,14 @@ const styles = StyleSheet.create({
     },
     input: {
         width: '100%',
-        marginBottom: 10,
-    },
-    item: {
         padding: 10,
-        borderBottomWidth: 1,
-        borderBottomColor: '#ccc',
-    },
-    selectedItem: {
-        padding: 10,
-        backgroundColor: '#e0e0e0',
+        borderWidth: 2,
+        borderColor: '#ccc',
         borderRadius: 5,
-        marginTop: 5,
+        marginBottom: 10,
+        fontSize: 16,
     },
-})
+    inputFocused: {
+        borderColor: '#e6e0e9',
+    },
+});
