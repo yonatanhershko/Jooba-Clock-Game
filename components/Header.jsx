@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, TouchableOpacity, StyleSheet,  Image  } from 'react-native'
+import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native'
 
 export default function Header() {
   return (
@@ -23,15 +23,15 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     padding: 10,
-    paddingTop:50,
+    paddingTop: 50,
     backgroundColor: '#f0f0f0',
 
-    
+
   },
   logo: {
-    width: 100,  
-    height: 40,  
-    resizeMode: 'contain', 
+    width: 100,
+    height: 40,
+    resizeMode: 'contain',
   },
   languageToggle: {
     flexDirection: 'row',

@@ -19,18 +19,20 @@ export default function WinsList({ wins }) {
 }
 
 const styles = StyleSheet.create({
-    container: {
-      padding: 20,
-    },
-    title: {
-      fontSize: 18,
-      fontWeight: 'bold',
-      marginBottom: 10,
-    },
-    card: {
-      backgroundColor: '#f0f0f0',
-      padding: 10,
-      marginRight: 10,
-      borderRadius: 5,
-    },
-  })
+  container: {
+    padding: 20,
+  },
+  title: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 10,
+  },
+  card: {
+    // backgroundColor: '#f0f0f0',
+    padding: 10,
+    marginRight: 10,
+    borderRadius: 5,
+    borderWidth: 2,
+    borderColor: '#f0f0f0',
+  },
+})

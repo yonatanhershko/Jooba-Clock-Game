@@ -1,15 +1,16 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import { View, FlatList, TouchableOpacity, Text, StyleSheet, TextInput } from 'react-native'
+import { API_KEY } from '../services/storage.js'
+
 // import TextField from '@mui/material/TextField'
 import axios from 'axios'
 import { debounce } from 'lodash'
 
-const INITIAL_LOCATIONS = ["Europe/London", "America/New_York"]
-const API_KEY = '71ce652a85d84a44b380069c8be0b9e2'
+// const INITIAL_LOCATIONS = ["Europe/London", "America/New_York"]
 
 export default function SearchBar({ onLocationSelect }) {
     const [search, setSearch] = useState('')
-    const [locations, setLocations] = useState(INITIAL_LOCATIONS)
+    const [locations, setLocations] = useState(null)
     const [selectedLocation, setSelectedLocation] = useState(null)
     const [isFocused, setIsFocused] = useState(false)
 
@@ -18,17 +19,17 @@ export default function SearchBar({ onLocationSelect }) {
             if (searchTerm.length > 2) {
                 try {
                     const response = await axios.get(`https://api.ipgeolocation.io/timezone?apiKey=${API_KEY}&location=${searchTerm}`)
-                    const timezoneData = response.data.timezone
+                    const timezoneData = response.data.timezone.replace(/_/g, " ")
                     setLocations([timezoneData])
                 } catch (error) {
                     console.error('Error fetching locations:', error)
                     setLocations([])
                 }
             } else if (searchTerm.length === 0) {
-                setLocations(INITIAL_LOCATIONS)
+                setLocations(null)
                 setSelectedLocation(null)
             }
-        }, 1000), // Reduced debounce time to 1 second
+        }, 1000), // change to 300ms
         []
     )
 
@@ -45,7 +46,7 @@ export default function SearchBar({ onLocationSelect }) {
 
     return (
         <View style={styles.container}>
-        <TextInput
+            <TextInput
                 style={[
                     styles.input,
                     isFocused && styles.inputFocused,
