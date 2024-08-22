@@ -83,7 +83,6 @@ export default function SearchBar({ onLocationSelect }) {
     )
 }
 
-
 const styles = StyleSheet.create({
     container: {
         width: '100%',
@@ -92,7 +91,7 @@ const styles = StyleSheet.create({
     input: {
         width: '100%',
         padding: 10,
-        borderWidth: 2,
+        // borderWidth: 2,
         borderColor: '#ccc',
         borderRadius: 5,
         marginBottom: 10,

@@ -6,6 +6,8 @@ import Header from './components/Header.jsx'
 import SearchBar from './components/SearchBar.jsx'
 import TimePicker from './components/TimePicker.jsx'
 import WinList from './components/WinList.jsx'
+import AntDesign from '@expo/vector-icons/AntDesign';
+
 import { saveWins, loadWins, API_KEY } from './services/storage.js'
 
 
@@ -61,6 +63,12 @@ export default function App() {
     }
   }
 
+  function handleDeleteWin(index) {
+    const updatedWins = wins.filter((_, i) => i !== index)
+    setWins(updatedWins)
+    saveWins(updatedWins)
+  }
+
   return (
     <View style={styles.container}>
       <Header />
@@ -73,7 +81,7 @@ export default function App() {
         </View>
       </View>
       <StatusBar style="auto" />{/*!*/}
-      <WinList wins={wins} />
+      <WinList wins={wins} onDeleteWin={handleDeleteWin} />
     </View>
   )
 }

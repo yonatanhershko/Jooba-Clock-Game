@@ -1,13 +1,13 @@
 // components/TimePicker.js
-import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import React, { useState } from 'react'
+import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native'
 
 export default function TimePicker({ onGuessSubmit }) {
-  const [hour, setHour] = useState('');
-  const [minute, setMinute] = useState('');
+  const [hour, setHour] = useState('')
+  const [minute, setMinute] = useState('')
 
-  const handleSubmit = () => {
-    onGuessSubmit(`${hour.padStart(2, '0')}:${minute.padStart(2, '0')}`);
+  function handleSubmit() {
+    onGuessSubmit(`${hour.padStart(2, '0')}:${minute.padStart(2, '0')}`)
   }
 
   return (
@@ -41,9 +41,8 @@ export default function TimePicker({ onGuessSubmit }) {
         </TouchableOpacity>
       </View>
     </View>
-  );
+  )
 }
-
 
 const styles = StyleSheet.create({
   container: {
