@@ -4,7 +4,7 @@ import { StatusBar } from 'expo-status-bar';
 
 import Header from './components/Header.jsx';
 import SearchBar from './components/SearchBar.jsx';
-// import TimePicker from './components/TimePicker.jsx';
+import TimePicker from './components/TimePicker.jsx';
 // import WinsList from './components/WinsList.jsx';
 
 export default function App() {
@@ -15,7 +15,7 @@ export default function App() {
         <Text style={styles.title}>THE CLOCK IS TICKING</Text>
         <Text style={styles.subtitle}>are you ready to guess?</Text>
         <SearchBar />
-        {/* <TimePicker /> */}
+        <TimePicker />
         <View style={styles.imageContainer}>
         </View>
       </View>
