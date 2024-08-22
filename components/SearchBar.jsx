@@ -1,38 +1,43 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import { View, TextInput, FlatList, TouchableOpacity, Text, StyleSheet } from 'react-native'
 import TextField from '@mui/material/TextField';
 import axios from 'axios'
+import { debounce } from 'lodash';
 
 const INITIAL_LOCATIONS = [
     "Europe/London", "America/New_York"
 ]
 
 export default function SearchBar({ onLocationSelect }) {
-    const [search, setSearch] = useState('')
-    const [locations, setLocations] = useState(INITIAL_LOCATIONS)
-    const [selectedLocation, setSelectedLocation] = useState(null)
+    const [search, setSearch] = useState('');
+    const [locations, setLocations] = useState(INITIAL_LOCATIONS);
+    const [selectedLocation, setSelectedLocation] = useState(null);
+
+    const debouncedFetchLocations = useCallback(
+        debounce(async (searchTerm) => {
+            if (searchTerm.length > 2) {
+                try {
+                    const response = await axios.get(`http://worldtimeapi.org/api/timezone/${searchTerm}`)
+                    const timezoneData = response.data.timezone;
+                    const joinedTimezones = timezoneData;
+                    console.log(response.data);
+                    setLocations([joinedTimezones])
+                } catch (error) {
+                    console.error('Error fetching locations:', error);
+                    setLocations([]);
+                }
+            } else if (searchTerm.length === 0) {
+                setLocations(INITIAL_LOCATIONS);
+                setSelectedLocation(null);
+            }
+        }, 2000),
+        []
+    );
 
     useEffect(() => {
-        if (search.length > 2) {
-            fetchLocations()
-            // console.log(search);
-        } else if (search.length === 0) {
-            setLocations(INITIAL_LOCATIONS)
-            setSelectedLocation(null)
-        }
-    }, [search])
-
-  
-    
-    async function fetchLocations() {
-        try {
-            const response = await axios.get(`http://worldtimeapi.org/api/timezone/${search}`)
-            setLocations(response.data.slice(0, 3))
-        } catch (error) {
-            console.error('Error fetching locations:', error)
-            setLocations([])
-        }
-    }
+        debouncedFetchLocations(search);
+        return () => debouncedFetchLocations.cancel(); // Cancel the debounce on unmount
+    }, [search, debouncedFetchLocations]);
 
     function handleLocationSelect(location) {
         setSelectedLocation(location)
@@ -42,10 +47,10 @@ export default function SearchBar({ onLocationSelect }) {
 
     return (
         <View style={styles.container}>
-               <TextField
+            <TextField
                 id="outlined-basic"
                 label="Search location"
-               
+
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 style={styles.input}

@@ -33,7 +33,7 @@ export default function App() {
       if (currentHour === guessedHour && currentMinute === guessedMinute) {
         Alert.alert("Correct!", "You guessed the time correctly!")
         console.log('test')
-        // setWins([...wins, { time: guessedTime, location: selectedLocation }])
+        setWins([...wins, { time: guessedTime, location: selectedLocation }])
       } else {
         console.log('nop')
         Alert.alert("Incorrect", `The correct time was ${currentHour}:${currentMinute}`)
