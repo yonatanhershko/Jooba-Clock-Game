@@ -117,7 +117,7 @@ const styles = StyleSheet.create({
         zIndex: 10,
     },
     input: {
-        width: '80%',
+        width: '100%',
         padding: 10,
         borderColor: '#ccc',
         borderRadius: 5,

@@ -83,7 +83,7 @@ export default function App() {
         <Text style={styles.title}>THE CLOCK IS TICKING</Text>
         <Text style={styles.subtitle}>are you ready to guess?</Text>
         <TouchableOpacity onPress={onRandomLocation}>
-          <Text style={styles.randBtn}>Give me a random place?</Text>
+          <Text style={styles.randBtn}>Try a random place?</Text>
         </TouchableOpacity>
         <SearchBar onLocationSelect={handleLocationSelect} initialLocation={randomLocation} />
         <TimePicker onGuessSubmit={checkGuess} />
