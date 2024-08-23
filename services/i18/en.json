@@ -1,0 +1,31 @@
+{
+  "title": "THE CLOCK IS TICKING",
+  "subtitle": "are you ready to guess?",
+  "randomBtn": "Try a random place?",
+  "correctAlert": "Correct!",
+  "correctMsg": "You guessed the time correctly!",
+  "incorrectAlert": "Incorrect",
+  "incorrectMsg": "The correct time was {{time}}",
+  "selectLocationError": "Error",
+  "selectLocationMsg": "Please select a location first.",
+  "fetchError": "Error",
+  "fetchErrorMsg": "Failed to fetch the current time. Please try again.",
+  "modal": {
+    "correctTitle": "Great Job!😄",
+    "incorrectTitle": "Incorrect😴",
+    "correctTimeText": "The correct time was {{correctTime}}",
+    "closeBtn": "Close"
+  },
+  "timePicker": {
+    "enterTime": "Enter time",
+    "hourLabel": "Hour",
+    "minuteLabel": "Minute",
+    "okBtn": "OK",
+    "cancelBtn": "Cancel"
+  },
+  "WinList": {
+    "win": "Wins",
+    "time": "Time",
+    "location": "Time Zone"
+  }
+}

@@ -1,3 +1,4 @@
+import 'intl-pluralrules'
 import React, { useEffect, useState } from 'react'
 import { StyleSheet, View, Text, Alert, TouchableOpacity } from 'react-native'
 import { StatusBar } from 'expo-status-bar'
@@ -8,7 +9,8 @@ import TimePicker from './components/TimePicker.jsx'
 import WinList from './components/WinList.jsx'
 import AnswerModal from './components/AnswerModal.jsx'
 import { saveWins, loadWins, API_KEY, RANDOM_LOCATIONS } from './services/storage.js'
-
+import { useTranslation } from 'react-i18next'
+import i18n from './services/i18/i18n.js'
 
 export default function App() {
   const [selectedLocation, setSelectedLocation] = useState(null)
@@ -17,6 +19,7 @@ export default function App() {
   const [modalVisible, setModalVisible] = useState(false)
   const [isCorrect, setIsCorrect] = useState(false)
   const [correctTime, setCorrectTime] = useState('')
+  const { t } = useTranslation()
 
   useEffect(() => {
     getWins()
@@ -85,10 +88,10 @@ export default function App() {
     <View style={styles.container}>
       <Header />
       <View style={styles.content}>
-        <Text style={styles.title}>THE CLOCK IS TICKING</Text>
-        <Text style={styles.subtitle}>are you ready to guess?</Text>
+        <Text style={styles.title}>{t('title')}</Text>
+        <Text style={styles.subtitle}>{t('subtitle')}</Text>
         <TouchableOpacity onPress={onRandomLocation}>
-          <Text style={styles.randBtn}>Try a random place?</Text>
+          <Text style={styles.randBtn}>{t('randomBtn')}</Text>
         </TouchableOpacity>
 
         <SearchBar onLocationSelect={handleLocationSelect} initialLocation={randomLocation} />

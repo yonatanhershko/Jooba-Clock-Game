@@ -1,7 +1,10 @@
 import React from 'react'
 import { View, Text, StyleSheet, Modal, TouchableOpacity } from 'react-native'
+import { useTranslation } from 'react-i18next'
 
 export default function AnswerModal({ isVisible, correctTime, isCorrect, onClose }) {
+    const { t } = useTranslation()
+
     return (
         <Modal
             transparent={true}
@@ -10,12 +13,12 @@ export default function AnswerModal({ isVisible, correctTime, isCorrect, onClose
         >
             <View style={styles.modalContainer}>
                 <View style={styles.modalContent}>
-                    <Text style={styles.modalTitle}>{isCorrect ? 'Great Job!😄' : 'Incorrect😴'}</Text>
+                    <Text style={styles.modalTitle}>{isCorrect ? t('modal.correctTitle') : t('modal.incorrectTitle')}</Text>
                     {!isCorrect && (
-                        <Text style={styles.modalText}>The correct time was {correctTime}</Text>
+                        <Text style={styles.modalText}>{t('modal.correctTimeText', { correctTime })}</Text>
                     )}
                     <TouchableOpacity onPress={onClose} style={styles.modalBtn}>
-                        <Text style={styles.modalBtnText}>Close</Text>
+                        <Text style={styles.modalBtnText}>{t('modal.closeBtn')}</Text>
                     </TouchableOpacity>
                 </View>
             </View>

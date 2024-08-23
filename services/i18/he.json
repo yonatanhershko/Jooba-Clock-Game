@@ -1,0 +1,31 @@
+{
+  "title": "השעון מתקתק",
+  "subtitle": "האם אתה מוכן לנחש?",
+  "randomBtn": "נסה מקום אקראי?",
+  "correctAlert": "נכון!",
+  "correctMsg": "ניחשת נכון את השעה!",
+  "incorrectAlert": "שגוי",
+  "incorrectMsg": "השעה הנכונה הייתה {{time}}",
+  "selectLocationError": "שגיאה",
+  "selectLocationMsg": "אנא בחר מיקום תחילה.",
+  "fetchError": "שגיאה",
+  "fetchErrorMsg": "נכשל בניסיון לקבל את השעה הנוכחית. אנא נסה שוב.",
+  "modal": {
+    "correctTitle": "עבודה נהדרת!😄",
+    "incorrectTitle": "כמעט נכון😴",
+    "correctTimeText": "הזמן הנכון היה {{correctTime}}",
+    "closeBtn": "סגור"
+  },
+  "timePicker": {
+    "enterTime": "הזן זמן",
+    "hourLabel": "שעה",
+    "minuteLabel": "דקה",
+    "okBtn": "אישור",
+    "cancelBtn": "ביטול"
+  },
+  "WinList": {
+    "win": "ניצחונות",
+    "time": "זמן",
+    "location": "אזור זמן"
+  }
+}

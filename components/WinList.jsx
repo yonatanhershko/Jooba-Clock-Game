@@ -3,11 +3,14 @@ import React from 'react'
 import { View, Text, StyleSheet, ScrollView } from 'react-native'
 import AntDesign from '@expo/vector-icons/AntDesign'
 import { TouchableOpacity } from 'react-native'
+import { useTranslation } from 'react-i18next'
 
 export default function WinsList({ wins, onDeleteWin }) {
+  const { t } = useTranslation()
+
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Wins</Text>
+      <Text style={styles.title}>{t('WinList.win')}</Text>
       <ScrollView horizontal>
         {wins.map((win, index) => (
           <View key={index} style={styles.card}>
@@ -15,8 +18,8 @@ export default function WinsList({ wins, onDeleteWin }) {
             >
               <AntDesign name="closecircleo" size={18} color="black" />
             </TouchableOpacity>
-            <Text style={styles.timeText}>Time: {win.time}</Text>
-            <Text>Time Zone: {win.location}</Text>
+            <Text style={styles.timeText}>{t('WinList.time')}: {win.time}</Text>
+            <Text>{t('WinList.location')}: {win.location}</Text>
           </View>
         ))}
       </ScrollView>

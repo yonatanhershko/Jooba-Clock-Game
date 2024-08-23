@@ -1,9 +1,10 @@
-// components/TimePicker.js
 import React, { useState } from 'react'
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native'
 import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
+import { useTranslation } from 'react-i18next'
 
 export default function TimePicker({ onGuessSubmit }) {
+  const { t } = useTranslation()
   const [hour, setHour] = useState('')
   const [minute, setMinute] = useState('')
 
@@ -13,7 +14,7 @@ export default function TimePicker({ onGuessSubmit }) {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.label}>Enter time</Text>
+      <Text style={styles.label}>{t('timePicker.enterTime')}</Text>
       <View style={styles.timeInputs}>
         <TextInput
           style={styles.input}
@@ -35,17 +36,17 @@ export default function TimePicker({ onGuessSubmit }) {
       </View>
 
       <View style={styles.underInputsTxtContainer} >
-        <Text style={styles.underInputsTxt}>Hour</Text>
-        <Text style={styles.underInputsTxt}>Minute</Text>
+        <Text style={styles.underInputsTxt}>{t('timePicker.hourLabel')}</Text>
+        <Text style={styles.underInputsTxt}>{t('timePicker.minuteLabel')}</Text>
       </View>
 
       <View style={styles.btnsContainer}>
         <View style={styles.btns}>
           <TouchableOpacity style={styles.btn} onPress={handleSubmit}>
-            <Text style={styles.btnTxt}>OK</Text>
+            <Text style={styles.btnTxt}>{t('timePicker.okBtn')}</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.btn} onPress={() => { setHour(''); setMinute(''); }}>
-            <Text style={styles.btnTxt}>Cancel</Text>
+            <Text style={styles.btnTxt}>{t('timePicker.cancelBtn')}</Text>
           </TouchableOpacity>
           <FontAwesome6 name="clock" size={16} color="#49454f" style={styles.icon} />
         </View>
