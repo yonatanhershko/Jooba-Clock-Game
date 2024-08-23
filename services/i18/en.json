@@ -27,5 +27,17 @@
     "win": "Wins",
     "time": "Time",
     "location": "Time Zone"
+  },
+  "infoModal": {
+    "welcomeTitle": "Welcome to Jooba Game",
+    "howToPlay": "How to Play",
+    "pickLocation": "Pick a Location",
+    "searchOrRandom": "Search for any place or hit 'Random Location' for a surprise spot!",
+    "guessTime": "Guess the Time",
+    "enterTime": "Enter the current hour and minute in that location.",
+    "submitAndSee": "Submit & See",
+    "hitOk": "Hit 'OK' to check if your guess is correct. If not, you'll see the right time.",
+    "trackWins": "Track Your Wins",
+    "viewGuesses": "View your successful guesses and see how well you know the world's time zones!"
   }
 }

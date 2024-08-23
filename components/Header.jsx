@@ -1,9 +1,9 @@
 import AntDesign from '@expo/vector-icons/AntDesign'
 import React from 'react'
 import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native'
-import i18n from '../services/i18/i18n.js' 
+import i18n from '../services/i18/i18n.js'
 
-export default function Header() {
+export default function Header({ onInfoPress }) {
 
   const changeLanguage = (lang) => {
     i18n.changeLanguage(lang)
@@ -13,7 +13,7 @@ export default function Header() {
     <View style={styles.header}>
       <Image source={require('../assets/imgs/logo.png')} style={styles.logo} />
       <View style={styles.languageToggle}>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={onInfoPress}>
           <AntDesign name="questioncircle" size={26} color="#c9a7f1" />
         </TouchableOpacity>
         <TouchableOpacity style={styles.langBtn} onPress={() => changeLanguage('en')}>

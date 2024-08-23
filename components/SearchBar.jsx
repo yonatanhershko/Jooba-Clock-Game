@@ -7,7 +7,7 @@ import { debounce } from 'lodash'
 const INITIAL_LOCATIONS = [
     "France",
     "Israel",
-    "Cypurs",
+    "Cyprus",
     "Italy",]
 
 export default function SearchBar({ onLocationSelect, initialLocation }) {
