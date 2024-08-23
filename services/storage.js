@@ -21,3 +21,9 @@ export async function loadWins() {
         return []
     }
 }
+
+export const RANDOM_LOCATIONS = [
+    "Tokyo", "New York", "London", "Paris", "Sydney", "Dubai", "Rio de Janeiro",
+    "Moscow", "Cairo", "Mumbai", "Singapore", "Los Angeles", "Berlin", "Toronto",
+    "Mexico City", "Istanbul", "Bangkok", "Cape Town", "Buenos Aires", "Seoul"
+  ]

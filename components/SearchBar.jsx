@@ -10,7 +10,7 @@ const INITIAL_LOCATIONS = [
     "Cypurs",
     "Italy",]
 
-export default function SearchBar({ onLocationSelect }) {
+export default function SearchBar({ onLocationSelect, initialLocation }) {
     const [search, setSearch] = useState('')
     const [locations, setLocations] = useState([])
     const [selectedLocation, setSelectedLocation] = useState(null)
@@ -23,6 +23,8 @@ export default function SearchBar({ onLocationSelect }) {
                 try {
                     const response = await axios.get(`https://api.ipgeolocation.io/timezone?apiKey=${API_KEY}&location=${searchTerm}`)
                     const timezoneData = response.data.timezone.replace(/_/g, " ")
+                    console.log(response);
+
                     setLocations([timezoneData])
                 } catch (error) {
                     console.error('Error fetching locations:', error)
@@ -36,6 +38,13 @@ export default function SearchBar({ onLocationSelect }) {
         }, 1000),//change to 300ms
         []
     )
+    useEffect(() => {
+        if (initialLocation) {
+            setSearch(initialLocation)
+            setSelectedLocation(initialLocation)
+            onLocationSelect(initialLocation)
+        }
+    }, [initialLocation])
 
     useEffect(() => {
         debouncedFetchLocations(search)
@@ -144,6 +153,6 @@ const styles = StyleSheet.create({
         backgroundColor: '#e6e0e9',
         borderRadius: 5,
         marginTop: 10,
-        display:'none',
+        display: 'none',
     },
 })

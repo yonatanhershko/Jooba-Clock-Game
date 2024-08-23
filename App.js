@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { StyleSheet, View, Text, Alert } from 'react-native'
+import { StyleSheet, View, Text, Alert,TouchableOpacity } from 'react-native'
 import { StatusBar } from 'expo-status-bar'
 import axios from 'axios'
 import Header from './components/Header.jsx'
@@ -7,12 +7,13 @@ import SearchBar from './components/SearchBar.jsx'
 import TimePicker from './components/TimePicker.jsx'
 import WinList from './components/WinList.jsx'
 
-import { saveWins, loadWins, API_KEY } from './services/storage.js'
+import { saveWins, loadWins, API_KEY, RANDOM_LOCATIONS } from './services/storage.js'
 
 
 export default function App() {
   const [selectedLocation, setSelectedLocation] = useState(null)
   const [wins, setWins] = useState([])
+  const [randomLocation, setRandomLocation] = useState('')
 
   useEffect(() => {
     getWins()
@@ -28,6 +29,13 @@ export default function App() {
   }
 
   function handleLocationSelect(location) {
+    setSelectedLocation(location)
+  }
+
+  function onRandomLocation() {
+    const randomIndex = Math.floor(Math.random() * RANDOM_LOCATIONS.length)
+    const location = RANDOM_LOCATIONS[randomIndex]
+    setRandomLocation(location)
     setSelectedLocation(location)
   }
 
@@ -74,7 +82,10 @@ export default function App() {
       <View style={styles.content}>
         <Text style={styles.title}>THE CLOCK IS TICKING</Text>
         <Text style={styles.subtitle}>are you ready to guess?</Text>
-        <SearchBar onLocationSelect={handleLocationSelect} />
+        <TouchableOpacity onPress={onRandomLocation}>
+          <Text style={styles.randBtn}>Give me a random place?</Text>
+        </TouchableOpacity>
+        <SearchBar onLocationSelect={handleLocationSelect} initialLocation={randomLocation} />
         <TimePicker onGuessSubmit={checkGuess} />
         <View style={styles.imageContainer}>
         </View>
@@ -107,4 +118,9 @@ const styles = StyleSheet.create({
   imageContainer: {
 
   },
+  randBtn:{
+    padding:5,
+    borderRadius:5,
+    backgroundColor:'#f3edf7',
+  }
 })

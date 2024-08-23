@@ -1,4 +1,4 @@
-// import AntDesign from '@expo/vector-icons/AntDesign'
+import AntDesign from '@expo/vector-icons/AntDesign'
 import React from 'react'
 import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native'
 
@@ -8,7 +8,7 @@ export default function Header() {
       <Image source={require('../assets/imgs/logo.png')} style={styles.logo} />
       <View style={styles.languageToggle}>
         <TouchableOpacity>
-          {/* <AntDesign name="questioncircle" size={26} color="#c9a7f1" /> */}
+          <AntDesign name="questioncircle" size={26} color="#c9a7f1" />
         </TouchableOpacity>
         <TouchableOpacity style={styles.langButton}>
           <Text style={styles.langBtnText}>ENG</Text>
