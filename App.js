@@ -1,6 +1,6 @@
 import 'intl-pluralrules'
 import React, { useEffect, useState } from 'react'
-import { StyleSheet, View, Text, Alert, TouchableOpacity, I18nManager } from 'react-native'
+import { StyleSheet, View, Text, Alert, TouchableOpacity, I18nManager,Image  } from 'react-native'
 import axios from 'axios'
 import Header from './components/Header.jsx'
 import SearchBar from './components/SearchBar.jsx'
@@ -8,6 +8,7 @@ import TimePicker from './components/TimePicker.jsx'
 import WinList from './components/WinList.jsx'
 import AnswerModal from './components/AnswerModal.jsx'
 import InfoModal from './components/InfoModal.jsx'
+import JoobaImg from './assets/imgs/JoobaImg.png'
 import { saveWins, loadWins, API_KEY, RANDOM_LOCATIONS } from './services/storage.js'
 import { useTranslation } from 'react-i18next'
 
@@ -108,6 +109,8 @@ export default function App() {
         <View style={styles.imageContainer}>
         </View>
       </View>
+      <Image source={JoobaImg} style={styles.JoobaImg} />
+
 
       <WinList wins={wins} onDeleteWin={handleDeleteWin} />
 
@@ -154,5 +157,11 @@ const styles = StyleSheet.create({
     padding: 5,
     borderRadius: 5,
     backgroundColor: '#f3edf7',
+  },
+  JoobaImg:{
+    height:200,
+    width:390,
+    alignSelf:'flex-end',
+    zIndex:-1,
   }
 })

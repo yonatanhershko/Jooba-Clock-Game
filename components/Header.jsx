@@ -5,9 +5,9 @@ import i18n from '../services/i18/i18n.js'
 
 export default function Header({ onInfoPress }) {
 
-  const changeLanguage = (lang) => {
+  function changeLanguage(lang) {
     i18n.changeLanguage(lang)
-  };
+  }
 
   return (
     <View style={styles.header}>
@@ -20,7 +20,7 @@ export default function Header({ onInfoPress }) {
           <Text style={styles.langBtnText}>ENG</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.langBtn} onPress={() => changeLanguage('he')}>
-          <Text style={styles.langBtnText}>עברית</Text>
+          <Text style={styles.langBtnText}>Hebrew</Text>
         </TouchableOpacity>
       </View>
     </View>
