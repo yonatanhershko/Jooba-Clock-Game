@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import { StyleSheet, View, Text, Alert,TouchableOpacity } from 'react-native'
+import { StyleSheet, View, Text, Alert, TouchableOpacity } from 'react-native'
 import { StatusBar } from 'expo-status-bar'
 import axios from 'axios'
 import Header from './components/Header.jsx'
 import SearchBar from './components/SearchBar.jsx'
 import TimePicker from './components/TimePicker.jsx'
 import WinList from './components/WinList.jsx'
-
+import AnswerModal from './components/AnswerModal.jsx'
 import { saveWins, loadWins, API_KEY, RANDOM_LOCATIONS } from './services/storage.js'
 
 
@@ -14,6 +14,9 @@ export default function App() {
   const [selectedLocation, setSelectedLocation] = useState(null)
   const [wins, setWins] = useState([])
   const [randomLocation, setRandomLocation] = useState('')
+  const [modalVisible, setModalVisible] = useState(false)
+  const [isCorrect, setIsCorrect] = useState(false)
+  const [correctTime, setCorrectTime] = useState('')
 
   useEffect(() => {
     getWins()
@@ -54,16 +57,18 @@ export default function App() {
       const [currentHour, currentMinute] = currentTime.split(':').map(Number)
 
       if (currentHour === guessedHour && currentMinute === guessedMinute) {
-        Alert.alert('Correct!', 'You guessed the time correctly!')
+        setIsCorrect(true)
+        // Alert.alert('Correct!', 'You guessed the time correctly!')
         const newWins = [...wins, { time: guessedTime, location: selectedLocation }]
         setWins(newWins)
         saveWins(newWins)
       } else {
-        console.log('worng')
-        console.log(currentHour)
-
-        Alert.alert('Incorrect', `The correct time was ${currentHour.toString().padStart(2, '0')}:${currentMinute.toString().padStart(2, '0')}`)
+        setIsCorrect(false)
+        setCorrectTime(`${currentHour.toString().padStart(2, '0')}:${currentMinute.toString().padStart(2, '0')}`)
+        // Alert.alert('Incorrect', `The correct time was ${currentHour.toString().padStart(2, '0')}:${currentMinute.toString().padStart(2, '0')}`)
       }
+      setModalVisible(true)
+
     } catch (error) {
       console.error(error)
       Alert.alert('Error', 'Failed to fetch the current time. Please try again.')
@@ -85,13 +90,23 @@ export default function App() {
         <TouchableOpacity onPress={onRandomLocation}>
           <Text style={styles.randBtn}>Try a random place?</Text>
         </TouchableOpacity>
+
         <SearchBar onLocationSelect={handleLocationSelect} initialLocation={randomLocation} />
+
         <TimePicker onGuessSubmit={checkGuess} />
         <View style={styles.imageContainer}>
         </View>
       </View>
+
       <StatusBar style="auto" />{/*!*/}
       <WinList wins={wins} onDeleteWin={handleDeleteWin} />
+
+      <AnswerModal
+        isVisible={modalVisible}
+        correctTime={correctTime}
+        isCorrect={isCorrect}
+        onClose={() => setModalVisible(false)}
+      />
     </View>
   )
 }
@@ -118,9 +133,9 @@ const styles = StyleSheet.create({
   imageContainer: {
 
   },
-  randBtn:{
-    padding:5,
-    borderRadius:5,
-    backgroundColor:'#f3edf7',
+  randBtn: {
+    padding: 5,
+    borderRadius: 5,
+    backgroundColor: '#f3edf7',
   }
 })

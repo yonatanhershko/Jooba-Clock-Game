@@ -10,10 +10,10 @@ export default function Header() {
         <TouchableOpacity>
           <AntDesign name="questioncircle" size={26} color="#c9a7f1" />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.langButton}>
+        <TouchableOpacity style={styles.langBtn}>
           <Text style={styles.langBtnText}>ENG</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.langButton}>
+        <TouchableOpacity style={styles.langBtn}>
           <Text style={styles.langBtnText}>Hebrew</Text>
         </TouchableOpacity>
       </View>
@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
   languageToggle: {
     flexDirection: 'row',
   },
-  langButton: {
+  langBtn: {
     padding: 5,
     marginLeft: 5,
     backgroundColor: '#ddd',

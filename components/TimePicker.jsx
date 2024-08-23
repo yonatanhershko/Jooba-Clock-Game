@@ -39,15 +39,15 @@ export default function TimePicker({ onGuessSubmit }) {
         <Text style={styles.underInputsTxt}>Minute</Text>
       </View>
 
-      <View style={styles.buttonsContainer}>
-        <View style={styles.buttons}>
-          <TouchableOpacity style={styles.button} onPress={handleSubmit}>
-            <Text>OK</Text>
+      <View style={styles.btnsContainer}>
+        <View style={styles.btns}>
+          <TouchableOpacity style={styles.btn} onPress={handleSubmit}>
+            <Text style={styles.btnTxt}>OK</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={() => { setHour(''); setMinute(''); }}>
-            <Text>Cancel</Text>
+          <TouchableOpacity style={styles.btn} onPress={() => { setHour(''); setMinute(''); }}>
+            <Text style={styles.btnTxt}>Cancel</Text>
           </TouchableOpacity>
-          <FontAwesome6 name="clock" size={16} color="black" style={styles.icon}/>
+          <FontAwesome6 name="clock" size={16} color="#49454f" style={styles.icon} />
         </View>
       </View>
 
@@ -59,13 +59,14 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: '#ece6f0',
     padding: 20,
-    borderRadius: 10,
+    borderRadius: 14,
     marginTop: 20,
     marginBottom: 20,
   },
   label: {
     fontSize: 12,
     marginBottom: 10,
+    color:'#726d77',
   },
   timeInputs: {
     flexDirection: 'row',
@@ -85,28 +86,32 @@ const styles = StyleSheet.create({
     fontSize: 18,
     marginHorizontal: 10,
   },
-  buttonsContainer: {
+  btnsContainer: {
     justifyContent: 'space-between',
   },
-  buttons: {
+  btns: {
     flexDirection: 'row-reverse',
     color: '#8779a7',
     gap: 14,
   },
-  button: {
+  btn: {
     color: '#8779a7',
     backgroundColor: '#ece6f0',
     borderRadius: 5,
   },
+  btnTxt: {
+    color: '#65558f',
+  },
   icon: {
-    flex: 1, 
+    flex: 1,
   },
   underInputsTxtContainer: {
     flexDirection: 'row',
     gap: 58,
-    marginBottom:18,
+    marginBottom: 18,
   },
   underInputsTxt: {
     fontSize: 12,
+    color:'#726d77',
   }
 });
