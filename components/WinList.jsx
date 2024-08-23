@@ -2,7 +2,7 @@
 import React from 'react'
 import { View, Text, StyleSheet, ScrollView } from 'react-native'
 import AntDesign from '@expo/vector-icons/AntDesign'
-import { TouchableOpacity } from 'react-native-web'
+import { TouchableOpacity } from 'react-native'
 
 export default function WinsList({ wins, onDeleteWin }) {
   return (

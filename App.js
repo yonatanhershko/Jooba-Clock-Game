@@ -6,7 +6,6 @@ import Header from './components/Header.jsx'
 import SearchBar from './components/SearchBar.jsx'
 import TimePicker from './components/TimePicker.jsx'
 import WinList from './components/WinList.jsx'
-import AntDesign from '@expo/vector-icons/AntDesign';
 
 import { saveWins, loadWins, API_KEY } from './services/storage.js'
 
