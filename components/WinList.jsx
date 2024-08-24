@@ -4,6 +4,8 @@ import AntDesign from '@expo/vector-icons/AntDesign'
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5'
 import { TouchableOpacity } from 'react-native'
 import { useTranslation } from 'react-i18next'
+import i18n from '../services/i18/i18n.js'
+
 const screenWidth = Dimensions.get('window').width
 const screenHeight = Dimensions.get('window').height
 
@@ -33,7 +35,7 @@ export default function WinsList({ wins, onDeleteWin }) {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>{t('WinList.win')}</Text>
+      <Text style={i18n.language === 'he' ? styles.titleRTL : styles.title}>{t('WinList.win')}</Text>
       <View style={styles.scrollContainer}>
         <TouchableOpacity onPress={scrollLeft} style={styles.arrowButton}>
           <FontAwesome5 name="arrow-left" size={24} color="black" />
@@ -49,11 +51,15 @@ export default function WinsList({ wins, onDeleteWin }) {
         >
           {wins.map((win, index) => (
             <View key={index} style={styles.card}>
-              <TouchableOpacity onPress={() => onDeleteWin(index)} style={styles.closeIcon}>
+              <TouchableOpacity onPress={() => onDeleteWin(index)} style={[
+                styles.closeIcon,
+                i18n.language === 'he' ? styles.closeIconRTL : styles.closeIconLTR
+              ]}>
                 <AntDesign name="closecircleo" size={18} color="black" />
               </TouchableOpacity>
-              <Text style={styles.timeText}>{t('WinList.time')}: {win.time}</Text>
-              <Text>{t('WinList.location')}: {win.location}</Text>
+              <Text style={i18n.language === 'he' ? styles.timeTextRTL : styles.timeText}>
+                {t('WinList.time')}: {win.time}</Text>
+              <Text style={i18n.language === 'he' ? styles.timezoneRTL : styles.timezone}>{t('WinList.location')}: {win.location}</Text>
             </View>
           ))}
         </ScrollView>
@@ -73,6 +79,12 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     marginBottom: 10,
+  },
+  titleRTL:{
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 10,
+    textAlign:'right',
   },
   scrollContainer: {
     flexDirection: 'row',
@@ -95,11 +107,24 @@ const styles = StyleSheet.create({
   closeIcon: {
     position: 'absolute',
     top: 5,
+  },
+  closeIconLTR: {
     right: 5,
+  },
+  closeIconRTL: {
+    left: 5,
   },
   timeText: {
     fontWeight: 'bold',
     marginBottom: 5,
+  },
+  timeTextRTL: {
+    fontWeight: 'bold',
+    marginBottom: 5,
+    textAlign: 'right',
+  },
+  timezoneRTL:{
+    textAlign: 'right',
   },
   arrowButton: {
     padding: 10,
