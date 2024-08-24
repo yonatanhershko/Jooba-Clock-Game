@@ -1,6 +1,6 @@
 import 'intl-pluralrules'
 import React, { useEffect, useState } from 'react'
-import { StyleSheet, View, Text, Alert, TouchableOpacity, I18nManager,Image  } from 'react-native'
+import { StyleSheet, View, Text, Alert, TouchableOpacity, I18nManager, Image, Dimensions } from 'react-native'
 import axios from 'axios'
 import Header from './components/Header.jsx'
 import SearchBar from './components/SearchBar.jsx'
@@ -8,7 +8,7 @@ import TimePicker from './components/TimePicker.jsx'
 import WinList from './components/WinList.jsx'
 import AnswerModal from './components/AnswerModal.jsx'
 import InfoModal from './components/InfoModal.jsx'
-import JoobaImg from './assets/imgs/JoobaImg.png'
+import joobaImg from './assets/imgs/JoobaImg.png'
 import { saveWins, loadWins, API_KEY, RANDOM_LOCATIONS } from './services/storage.js'
 import { useTranslation } from 'react-i18next'
 
@@ -20,6 +20,7 @@ export default function App() {
   const [isCorrect, setIsCorrect] = useState(false)
   const [correctTime, setCorrectTime] = useState('')
   const [infoModalVisible, setInfoModalVisible] = useState(false)
+
 
   const { t } = useTranslation()
 
@@ -100,17 +101,16 @@ export default function App() {
         <Text style={styles.title}>{t('title')}</Text>
         <Text style={styles.subtitle}>{t('subtitle')}</Text>
         <TouchableOpacity onPress={onRandomLocation}>
-          <Text style={styles.randBtn}>{t('randomBtn')}</Text>
+          <Text style={styles.randomBtn}>{t('randomBtn')}</Text>
         </TouchableOpacity>
 
         <SearchBar onLocationSelect={handleLocationSelect} initialLocation={randomLocation} />
 
-        <TimePicker onGuessSubmit={checkGuess} />
-        <View style={styles.imageContainer}>
+        <View style={styles.mainPageContainer}>
+          <TimePicker onGuessSubmit={checkGuess}/>
+          <Image source={joobaImg} style={styles.JoobaImg} />
         </View>
       </View>
-      <Image source={JoobaImg} style={styles.JoobaImg} />
-
 
       <WinList wins={wins} onDeleteWin={handleDeleteWin} />
 
@@ -130,6 +130,8 @@ export default function App() {
     </View>
   )
 }
+const screenWidth = Dimensions.get('window').width
+const screenHeight = Dimensions.get('window').height
 
 const styles = StyleSheet.create({
   container: {
@@ -150,18 +152,22 @@ const styles = StyleSheet.create({
     fontSize: 16,
     marginBottom: 20,
   },
-  imageContainer: {
-
+  mainPageContainer: {
+    flex: 1,
+    gap: 10,
+    flexDirection: screenWidth > 1000 ? 'row' : screenWidth < 500 ? 'column' : 0,
+    justifyContent: 'space-around',
+    width: screenWidth > 1000 ? '70%' : screenWidth < 500 ? '100%' : 0,
+    alignContent: 'center'
   },
-  randBtn: {
+  randomBtn: {
     padding: 5,
     borderRadius: 5,
     backgroundColor: '#f3edf7',
   },
-  JoobaImg:{
-    height:200,
-    width:390,
-    alignSelf:'flex-end',
-    zIndex:-1,
-  }
+  JoobaImg: {
+    height: screenHeight < 700 ? 320 : 200,
+    width: screenWidth > 1000 ? 600 : screenWidth < 500 ? 340 : 0,
+    zIndex: -1,
+  },
 })

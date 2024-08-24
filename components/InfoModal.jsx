@@ -1,6 +1,9 @@
 import React from 'react'
-import { View, Text, StyleSheet, ScrollView, Modal, TouchableOpacity, I18nManager  } from 'react-native'
+import { View, Text, StyleSheet, ScrollView, Modal, TouchableOpacity, I18nManager, Image } from 'react-native'
 import { useTranslation } from 'react-i18next'
+import airplane from '../assets/imgs/airplane1.png'
+import plant from '../assets/imgs/plant1.png'
+
 const isRTL = I18nManager.isRTL
 
 export default function InfoModal({ isVisible, onClose }) {
@@ -13,7 +16,7 @@ export default function InfoModal({ isVisible, onClose }) {
             animationType="slide"
         >
             <View style={styles.modalContainer}>
-                <ScrollView style={styles.container}>
+                <View style={styles.container}>
                     <Text style={styles.title}>{t('infoModal.welcomeTitle')}</Text>
 
                     <Text style={styles.sectionTitle}>{t('infoModal.howToPlay')}</Text>
@@ -33,7 +36,10 @@ export default function InfoModal({ isVisible, onClose }) {
                     <TouchableOpacity onPress={onClose} style={styles.modalBtn}>
                         <Text style={styles.modalBtnText}>{t('modal.closeBtn')}</Text>
                     </TouchableOpacity>
-                </ScrollView>
+                    <Image source={airplane} style={styles.airplane} />
+                    <Image source={plant} style={styles.plant} />
+
+                </View>
             </View>
         </Modal>
     )
@@ -54,6 +60,23 @@ const styles = StyleSheet.create({
         maxHeight: '57%',
         // flexDirection: isRTL ? 'rtl' : 'ltr',
         textAlign: 'center',
+        position: 'relative',
+    },
+    airplane: {
+        position: 'absolute',
+        top: -8,
+        right: -40,
+        height: 160,
+        width: 160,
+        zIndex: -1,
+    },
+    plant: {
+        position: 'absolute',
+        bottom: -1,
+        left: -32,
+        height: 120,
+        width: 120,
+        zIndex: -1,
     },
     title: {
         fontSize: 24,

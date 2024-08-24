@@ -3,6 +3,7 @@ import { View, FlatList, TouchableOpacity, Text, StyleSheet, TextInput, Animated
 import { API_KEY } from '../services/storage.js'
 import axios from 'axios'
 import { debounce } from 'lodash'
+import { useTranslation } from 'react-i18next'
 
 const INITIAL_LOCATIONS = [
     "France",
@@ -16,6 +17,8 @@ export default function SearchBar({ onLocationSelect, initialLocation }) {
     const [selectedLocation, setSelectedLocation] = useState(null)
     const [isDropdownVisible, setIsDropdownVisible] = useState(false)
     const animatedHeight = useRef(new Animated.Value(0)).current
+    const { t } = useTranslation()
+
 
     const debouncedFetchLocations = useCallback(
         debounce(async (searchTerm) => {
@@ -73,7 +76,7 @@ export default function SearchBar({ onLocationSelect, initialLocation }) {
                     styles.input,
                     isDropdownVisible && styles.inputFocused,
                 ]}
-                placeholder="Search location"
+                placeholder={t('searchLocation')}
                 value={search}
                 onChangeText={setSearch}
                 onFocus={() => setIsDropdownVisible(true)}

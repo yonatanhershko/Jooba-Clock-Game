@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native'
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Dimensions } from 'react-native'
 import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
 import { useTranslation } from 'react-i18next'
 
@@ -14,30 +14,33 @@ export default function TimePicker({ onGuessSubmit }) {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.label}>{t('timePicker.enterTime')}</Text>
-      <View style={styles.timeInputs}>
-        <TextInput
-          style={styles.input}
-          placeholder="00"
-          value={hour}
-          onChangeText={setHour}
-          // keyboardType="numeric"
-          maxLength={2}
-        />
-        <Text style={styles.colon}>:</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="00"
-          value={minute}
-          onChangeText={setMinute}
-          // keyboardType="numeric"
-          maxLength={2}
-        />
-      </View>
 
-      <View style={styles.underInputsTxtContainer} >
-        <Text style={styles.underInputsTxt}>{t('timePicker.hourLabel')}</Text>
-        <Text style={styles.underInputsTxt}>{t('timePicker.minuteLabel')}</Text>
+      <View style={styles.timeInputsContainer}>
+        <Text style={styles.label}>{t('timePicker.enterTime')}</Text>
+        <View style={styles.timeInputs}>
+          <TextInput
+            style={styles.input}
+            placeholder="00"
+            value={hour}
+            onChangeText={setHour}
+            // keyboardType="numeric"
+            maxLength={2}
+          />
+          <Text style={styles.colon}>:</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="00"
+            value={minute}
+            onChangeText={setMinute}
+            // keyboardType="numeric"
+            maxLength={2}
+          />
+        </View>
+
+        <View style={styles.underInputsTxtContainer} >
+          <Text style={styles.underInputsTxt}>{t('timePicker.hourLabel')}</Text>
+          <Text style={styles.underInputsTxt}>{t('timePicker.minuteLabel')}</Text>
+        </View>
       </View>
 
       <View style={styles.btnsContainer}>
@@ -55,19 +58,30 @@ export default function TimePicker({ onGuessSubmit }) {
     </View>
   )
 }
+const screenWidth = Dimensions.get('window').width
+const screenHeight = Dimensions.get('window').height
 
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#ece6f0',
-    padding: 20,
+    padding: 30,
+    width: screenWidth > 1000 ? 350 : screenWidth < 500 ? 220 : 0,
     borderRadius: 14,
     marginTop: 20,
-    marginBottom: 20,
+    marginBottom:20,
+    marginLeft:screenWidth > 1000 ? 15 : screenWidth < 500 ? 50 : 0,
+    paddingLeft: screenWidth > 1000 ? 29 : screenWidth < 500 ? 16 : 0,
+    height: screenHeight < 700 ? 200 : 200,
+  },
+  timeInputsContainer: {
+    flex: 1,
+    justifyContent: 'space-between',
+    alignContent: 'center'
   },
   label: {
     fontSize: 12,
     marginBottom: 10,
-    color:'#726d77',
+    color: '#726d77',
   },
   timeInputs: {
     flexDirection: 'row',
@@ -77,15 +91,15 @@ const styles = StyleSheet.create({
   input: {
     backgroundColor: '#e6e0e9',
     padding: 10,
-    fontSize: 18,
-    width: 60,
+    fontSize: screenHeight < 700 ? 32 : 24,
+    width: '50%',
     textAlign: 'center',
     borderRadius: 4,
-
+    height: screenHeight < 700 ? 70 : 50,
   },
   colon: {
     fontSize: 18,
-    marginHorizontal: 10,
+    marginHorizontal: 5,
   },
   btnsContainer: {
     justifyContent: 'space-between',
@@ -105,14 +119,17 @@ const styles = StyleSheet.create({
   },
   icon: {
     flex: 1,
+    marginTop: 1,
   },
   underInputsTxtContainer: {
+    flex: 1,
     flexDirection: 'row',
-    gap: 58,
+    width: screenWidth > 1000 ? '65%' : screenWidth < 500 ? '85%' : 0,
+    justifyContent: 'space-between',
     marginBottom: 18,
   },
   underInputsTxt: {
     fontSize: 12,
-    color:'#726d77',
+    color: '#726d77',
   }
 });

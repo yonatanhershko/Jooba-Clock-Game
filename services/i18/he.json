@@ -10,6 +10,7 @@
   "selectLocationMsg": "אנא בחר מיקום תחילה.",
   "fetchError": "שגיאה",
   "fetchErrorMsg": "נכשל בניסיון לקבל את השעה הנוכחית. אנא נסה שוב.",
+  "searchLocation":"חיפוש מקום",
   "modal": {
     "correctTitle": "עבודה נהדרת!😄",
     "incorrectTitle": "כמעט נכון😴",

@@ -10,6 +10,7 @@
   "selectLocationMsg": "Please select a location first.",
   "fetchError": "Error",
   "fetchErrorMsg": "Failed to fetch the current time. Please try again.",
+  "searchLocation":"Search location",
   "modal": {
     "correctTitle": "Great Job!😄",
     "incorrectTitle": "Incorrect😴",
