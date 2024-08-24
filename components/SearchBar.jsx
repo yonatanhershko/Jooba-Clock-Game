@@ -143,10 +143,10 @@ const styles = StyleSheet.create({
         borderColor: '#ccc',
         borderRadius: 5,
         overflow: 'hidden',
+        
     },
     item: {
         padding: 10,
-        borderBottomWidth: 1,
         borderBottomColor: '#eee',
     },
     selectedItem: {
