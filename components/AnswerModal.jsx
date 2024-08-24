@@ -18,7 +18,9 @@ export default function AnswerModal({ isVisible, correctTime, isCorrect, onClose
                     {!isCorrect && (
                         <Text style={styles.modalText}>{t('modal.correctTimeText', { correctTime })}</Text>
                     )}
-                    <Image source={trophy} style={styles.trophy} />
+                    {isCorrect && (
+                        <Image source={trophy} style={styles.trophy} />
+                    )}
 
                     <TouchableOpacity onPress={onClose} style={styles.modalBtn}>
                         <Text style={styles.modalBtnText}>{t('modal.closeBtn')}</Text>
