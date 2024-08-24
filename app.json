@@ -6,6 +6,7 @@
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
+    "homepage": "https://yonatanhershko.github.io/Jooba-Clock-Game",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
@@ -21,7 +22,11 @@
       }
     },
     "scripts": {
-      "start": "expo start"
+      "start": "expo start",
+      "build": "expo build:web",
+      "predeploy": "yarn build",
+      "deploy": "gh-pages -d web-build",
+      "eject": "expo eject"
     },
     "web": {
       "favicon": "./assets/favicon.png"
