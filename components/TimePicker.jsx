@@ -7,6 +7,8 @@ export default function TimePicker({ onGuessSubmit }) {
   const { t } = useTranslation()
   const [hour, setHour] = useState('')
   const [minute, setMinute] = useState('')
+  const [hourFocused, setHourFocused] = useState(false)
+  const [minuteFocused, setMinuteFocused] = useState(false)
 
   function handleSubmit() {
     onGuessSubmit(`${hour.padStart(2, '0')}:${minute.padStart(2, '0')}`)
@@ -14,29 +16,35 @@ export default function TimePicker({ onGuessSubmit }) {
 
   return (
     <View style={styles.container}>
-
       <View style={styles.timeInputsContainer}>
         <Text style={styles.label}>{t('timePicker.enterTime')}</Text>
         <View style={styles.timeInputs}>
           <TextInput
-            style={styles.input}
+            style={[
+              styles.input,
+              hourFocused && styles.inputFocused,
+            ]}
             placeholder="00"
             value={hour}
             onChangeText={setHour}
-            // keyboardType="numeric"
             maxLength={2}
+            onFocus={() => setHourFocused(true)}
+            onBlur={() => setHourFocused(false)}
           />
           <Text style={styles.colon}>:</Text>
           <TextInput
-            style={styles.input}
+            style={[
+              styles.input,
+              minuteFocused && styles.inputFocused,
+            ]}
             placeholder="00"
             value={minute}
             onChangeText={setMinute}
-            // keyboardType="numeric"
             maxLength={2}
+            onFocus={() => setMinuteFocused(true)}
+            onBlur={() => setMinuteFocused(false)}
           />
         </View>
-
         <View style={styles.underInputsTxtContainer} >
           <Text style={styles.underInputsTxt}>{t('timePicker.hourLabel')}</Text>
           <Text style={styles.underInputsTxt}>{t('timePicker.minuteLabel')}</Text>
@@ -54,10 +62,10 @@ export default function TimePicker({ onGuessSubmit }) {
           <FontAwesome6 name="clock" size={16} color="#49454f" style={styles.icon} />
         </View>
       </View>
-
     </View>
   )
 }
+
 const screenWidth = Dimensions.get('window').width
 const screenHeight = Dimensions.get('window').height
 
@@ -96,6 +104,11 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     borderRadius: 4,
     height: screenHeight < 700 ? 70 : 50,
+    color: '#1d1b20', // Default text color
+  },
+  inputFocused: {
+    backgroundColor: '#eaddff',
+    color: '#21005d',
   },
   colon: {
     fontSize: 18,

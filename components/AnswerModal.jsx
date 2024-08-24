@@ -1,5 +1,7 @@
 import React from 'react'
-import { View, Text, StyleSheet, Modal, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, Modal, TouchableOpacity, Image } from 'react-native'
+import trophy from '../assets/imgs/trophy.png'
+
 import { useTranslation } from 'react-i18next'
 
 export default function AnswerModal({ isVisible, correctTime, isCorrect, onClose }) {
@@ -17,6 +19,8 @@ export default function AnswerModal({ isVisible, correctTime, isCorrect, onClose
                     {!isCorrect && (
                         <Text style={styles.modalText}>{t('modal.correctTimeText', { correctTime })}</Text>
                     )}
+                    <Image source={trophy} style={styles.trophy} />
+
                     <TouchableOpacity onPress={onClose} style={styles.modalBtn}>
                         <Text style={styles.modalBtnText}>{t('modal.closeBtn')}</Text>
                     </TouchableOpacity>
@@ -32,6 +36,10 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    },
+    trophy: {
+        height: 150,
+        width: 150,
     },
     modalContent: {
         width: 300,

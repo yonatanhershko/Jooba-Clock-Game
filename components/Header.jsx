@@ -1,13 +1,21 @@
 import AntDesign from '@expo/vector-icons/AntDesign'
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native'
 import i18n from '../services/i18/i18n.js'
 import logo from '../assets/imgs/logo.png'
+import { useTranslation } from 'react-i18next'
 
 export default function Header({ onInfoPress }) {
+  const [selectedLang, setSelectedLang] = useState('en')
+  const { t } = useTranslation()
+
+  useEffect(() => {
+    changeLanguage('en')
+  }, [])
 
   function changeLanguage(lang) {
     i18n.changeLanguage(lang)
+    setSelectedLang(lang)
   }
 
   return (
@@ -17,11 +25,17 @@ export default function Header({ onInfoPress }) {
         <TouchableOpacity onPress={onInfoPress}>
           <AntDesign name="questioncircle" size={26} color="#c9a7f1" />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.langBtn} onPress={() => changeLanguage('en')}>
-          <Text style={styles.langBtnText}>ENG</Text>
+        <TouchableOpacity
+          style={[styles.langBtn, selectedLang === 'en' && styles.selectedLangBtn]}
+          onPress={() => changeLanguage('en')}
+        >
+          <Text style={[styles.langBtnText, selectedLang === 'en' && styles.selectedLangBtnText]}>{t('lang.eng')}</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.langBtn} onPress={() => changeLanguage('he')}>
-          <Text style={styles.langBtnText}>Hebrew</Text>
+        <TouchableOpacity
+          style={[styles.langBtn, selectedLang === 'he' && styles.selectedLangBtn]}
+          onPress={() => changeLanguage('he')}
+        >
+          <Text style={[styles.langBtnText, selectedLang === 'he' && styles.selectedLangBtnText]}>{t('lang.heb')}</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -36,8 +50,6 @@ const styles = StyleSheet.create({
     padding: 10,
     paddingTop: 50,
     backgroundColor: '#f0f0f0',
-
-
   },
   logo: {
     width: 100,
@@ -53,10 +65,15 @@ const styles = StyleSheet.create({
     backgroundColor: '#ddd',
     borderRadius: 5,
     width: 100,
-
+  },
+  selectedLangBtn: {
+    backgroundColor: '#2c2c2c',
   },
   langBtnText: {
     textAlign: 'center',
-
-  }
+    color: 'black',
+  },
+  selectedLangBtnText: {
+    color: 'white',
+  },
 })
