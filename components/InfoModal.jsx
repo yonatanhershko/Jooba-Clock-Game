@@ -58,7 +58,6 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         width: '85%',
         maxHeight: '57%',
-        // flexDirection: isRTL ? 'rtl' : 'ltr',
         textAlign: 'center',
         position: 'relative',
     },

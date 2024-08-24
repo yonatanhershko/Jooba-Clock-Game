@@ -1,6 +1,5 @@
-import 'intl-pluralrules'
 import React, { useEffect, useState } from 'react'
-import {  ScrollView,StyleSheet, View, Text, Alert, TouchableOpacity, I18nManager, Image, Dimensions } from 'react-native'
+import { FlatList, StyleSheet, View, Text, Alert, TouchableOpacity, Image, Dimensions } from 'react-native'
 import axios from 'axios'
 import Header from './components/Header.jsx'
 import SearchBar from './components/SearchBar.jsx'
@@ -20,15 +19,10 @@ export default function App() {
   const [isCorrect, setIsCorrect] = useState(false)
   const [correctTime, setCorrectTime] = useState('')
   const [infoModalVisible, setInfoModalVisible] = useState(false)
-
-
   const { t } = useTranslation()
 
   useEffect(() => {
     getWins()
-    const isRTL = I18nManager.isRTL
-    I18nManager.allowRTL(isRTL)
-    I18nManager.forceRTL(isRTL)
   }, [])
 
   async function getWins() {
@@ -71,14 +65,12 @@ export default function App() {
 
       if (currentHour === guessedHour && currentMinute === guessedMinute) {
         setIsCorrect(true)
-        // Alert.alert('Correct!', 'You guessed the time correctly!')
         const newWins = [...wins, { time: guessedTime, location: selectedLocation }]
         setWins(newWins)
         saveWins(newWins)
       } else {
         setIsCorrect(false)
         setCorrectTime(`${currentHour.toString().padStart(2, '0')}:${currentMinute.toString().padStart(2, '0')}`)
-        // Alert.alert('Incorrect', `The correct time was ${currentHour.toString().padStart(2, '0')}:${currentMinute.toString().padStart(2, '0')}`)
       }
       setModalVisible(true)
 
@@ -94,50 +86,66 @@ export default function App() {
     saveWins(updatedWins)
   }
 
+  function renderItem({ item }) {
+    switch (item.type) {
+      case 'header':
+        return <Header onInfoPress={toggleInfoModal} />
+      case 'content':
+        return (
+          <View style={styles.content}>
+            <Text style={styles.title}>{t('title')}</Text>
+            <Text style={styles.subtitle}>{t('subtitle')}</Text>
+            <TouchableOpacity style={styles.randomBtn} onPress={onRandomLocation}>
+              <Text >{t('randomBtn')}</Text>
+            </TouchableOpacity>
+            <SearchBar onLocationSelect={handleLocationSelect} initialLocation={randomLocation} />
+            <View style={styles.mainPageContainer}>
+              <TimePicker onGuessSubmit={checkGuess} />
+              <Image source={joobaImg} style={styles.JoobaImg} />
+            </View>
+          </View>
+        )
+      case 'winList':
+        return <WinList wins={wins} onDeleteWin={handleDeleteWin} style={styles.winList} />
+      default:
+        return null
+    }
+  }
+
+  const data = [
+    { type: 'header', key: 'header' },
+    { type: 'content', key: 'content' },
+    { type: 'winList', key: 'winList' },
+  ]
+
   return (
-    <ScrollView contentContainerStyle={styles.scrollView}>
     <View style={styles.container}>
-      <Header onInfoPress={toggleInfoModal} />
-      <View style={styles.content}>
-        <Text style={styles.title}>{t('title')}</Text>
-        <Text style={styles.subtitle}>{t('subtitle')}</Text>
-        <TouchableOpacity onPress={onRandomLocation}>
-          <Text style={styles.randomBtn}>{t('randomBtn')}</Text>
-        </TouchableOpacity>
-
-        <SearchBar onLocationSelect={handleLocationSelect} initialLocation={randomLocation} />
-
-        <View style={styles.mainPageContainer}>
-          <TimePicker onGuessSubmit={checkGuess} />
-          <Image source={joobaImg} style={styles.JoobaImg} />
-        </View>
-      </View>
-
-      <WinList wins={wins} onDeleteWin={handleDeleteWin} style={styles.winList} />
-
+      <FlatList
+        data={data}
+        renderItem={renderItem}
+        keyExtractor={item => item.key}
+        contentContainerStyle={styles.flatListContent}
+      />
       <AnswerModal
         isVisible={modalVisible}
         correctTime={correctTime}
         isCorrect={isCorrect}
         onClose={() => setModalVisible(false)}
       />
-
       <InfoModal
         isVisible={infoModalVisible}
         onClose={toggleInfoModal}
       />
-
-
     </View>
-    </ScrollView>
   )
 }
+
 const screenWidth = Dimensions.get('window').width
 const screenHeight = Dimensions.get('window').height
 
 const styles = StyleSheet.create({
-  scrollView: {
-    flexGrow: 1, // Ensures the scroll view takes up available space
+  flatListContent: {
+    flexGrow: 1,
   },
   container: {
     flex: 1,
@@ -152,6 +160,12 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     marginBottom: 10,
+    color: '#363636',
+    backgroundColor: '#f8f8f8',
+    padding: 7,
+    borderWidth: 1,
+    borderColor: '#cacaca',
+    borderRadius: 10,
   },
   subtitle: {
     fontSize: 16,
@@ -166,8 +180,12 @@ const styles = StyleSheet.create({
     alignContent: 'center'
   },
   randomBtn: {
-    padding: 5,
-    borderRadius: 5,
+    padding: 7,
+
+    marginBottom: 10,
+    borderWidth: 1,
+    borderColor: '#cacaca',
+    borderRadius: 10,
     backgroundColor: '#f3edf7',
   },
   JoobaImg: {

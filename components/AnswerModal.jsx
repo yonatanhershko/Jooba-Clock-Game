@@ -1,7 +1,6 @@
 import React from 'react'
 import { View, Text, StyleSheet, Modal, TouchableOpacity, Image } from 'react-native'
 import trophy from '../assets/imgs/trophy.png'
-
 import { useTranslation } from 'react-i18next'
 
 export default function AnswerModal({ isVisible, correctTime, isCorrect, onClose }) {

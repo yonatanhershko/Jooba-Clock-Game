@@ -1,6 +1,6 @@
 import AntDesign from '@expo/vector-icons/AntDesign'
 import React, { useState, useEffect } from 'react'
-import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native'
+import { View, Text, TouchableOpacity, StyleSheet, Image, Dimensions } from 'react-native'
 import i18n from '../services/i18/i18n.js'
 import logo from '../assets/imgs/logo.png'
 import { useTranslation } from 'react-i18next'
@@ -41,6 +41,7 @@ export default function Header({ onInfoPress }) {
     </View>
   )
 }
+const screenWidth = Dimensions.get('window').width
 
 const styles = StyleSheet.create({
   header: {
@@ -48,7 +49,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     padding: 10,
-    paddingTop: 50,
+    paddingTop: screenWidth > 700 ? 20 : screenWidth < 500 ? 50 : 0,
     backgroundColor: '#f0f0f0',
   },
   logo: {

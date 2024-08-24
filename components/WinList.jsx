@@ -37,9 +37,11 @@ export default function WinsList({ wins, onDeleteWin }) {
     <View style={styles.container}>
       <Text style={i18n.language === 'he' ? styles.titleRTL : styles.title}>{t('WinList.win')}</Text>
       <View style={styles.scrollContainer}>
+        
         <TouchableOpacity onPress={scrollLeft} style={styles.arrowButton}>
           <FontAwesome5 name="arrow-left" size={24} color="black" />
         </TouchableOpacity>
+
         <ScrollView
           ref={scrollViewRef}
           horizontal
@@ -57,12 +59,15 @@ export default function WinsList({ wins, onDeleteWin }) {
               ]}>
                 <AntDesign name="closecircleo" size={18} color="black" />
               </TouchableOpacity>
+
               <Text style={i18n.language === 'he' ? styles.timeTextRTL : styles.timeText}>
                 {t('WinList.time')}: {win.time}</Text>
+              
               <Text style={i18n.language === 'he' ? styles.timezoneRTL : styles.timezone}>{t('WinList.location')}: {win.location}</Text>
             </View>
           ))}
         </ScrollView>
+
         <TouchableOpacity onPress={scrollRight} style={styles.arrowButton}>
           <FontAwesome5 name="arrow-right" size={24} color="black" />
         </TouchableOpacity>
@@ -130,10 +135,10 @@ const styles = StyleSheet.create({
     padding: 10,
     backgroundColor: 'white',
     borderRadius: '50%',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1, // Shadow opacity
-    shadowRadius: 3, // Shadow blur
+    boxShadowColor: '#000',
+    boxShadowOffset: { width: 0, height: 2 },
+    boxShadowOpacity: 0.1, // Shadow opacity
+    boxShadowRadius: 3, // Shadow blur
     elevation: 3, //Android 
   },
 })

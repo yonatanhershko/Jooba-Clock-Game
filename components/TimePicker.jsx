@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Dimensions } from 'react-native'
-import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
+import FontAwesome6 from '@expo/vector-icons/FontAwesome6'
 import { useTranslation } from 'react-i18next'
 import i18n from '../services/i18/i18n.js'
 
@@ -54,14 +54,16 @@ export default function TimePicker({ onGuessSubmit }) {
 
       <View style={styles.btnsContainer}>
         <View style={i18n.language === 'he' ? styles.btnsFieldRTL : styles.btnsField}>
-          <View style={i18n.language === 'he' ? styles.onlyBtnsRTL : styles.onlyBtns}>
+
+          <View style={i18n.language === 'he' ? styles.btnsRTL : styles.btns}>
             <TouchableOpacity style={styles.btn} onPress={handleSubmit}>
               <Text style={styles.btnTxt}>{t('timePicker.okBtn')}</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.btn} onPress={() => { setHour(''); setMinute(''); }}>
+            <TouchableOpacity style={styles.btn} onPress={() => { setHour(''), setMinute('')}}>
               <Text style={styles.btnTxt}>{t('timePicker.cancelBtn')}</Text>
             </TouchableOpacity>
           </View>
+
           <FontAwesome6 name="clock" size={16} color="#49454f" style={styles.icon} />
         </View>
       </View>
@@ -127,7 +129,7 @@ const styles = StyleSheet.create({
   },
   btnsContainer: {
     justifyContent: 'space-between',
-    width:screenWidth > 700 ? '100%' : screenWidth < 500 ? '110%' : 0,
+    width: screenWidth > 700 ? '100%' : screenWidth < 500 ? '110%' : 0,
   },
   btnsField: {
     flexDirection: 'row-reverse',
@@ -139,11 +141,11 @@ const styles = StyleSheet.create({
     color: '#8779a7',
     gap: screenWidth > 700 ? 190 : screenWidth < 500 ? 94 : 0,
   },
-  onlyBtns:{
+  btns: {
     flexDirection: 'row-reverse',
     gap: 14,
   },
-  onlyBtnsRTL:{
+  btnsRTL: {
     flexDirection: 'row',
     gap: 14,
   },
@@ -181,4 +183,4 @@ const styles = StyleSheet.create({
     color: '#726d77',
 
   }
-});
+})

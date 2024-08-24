@@ -26,8 +26,6 @@ export default function SearchBar({ onLocationSelect, initialLocation }) {
                 try {
                     const response = await axios.get(`https://api.ipgeolocation.io/timezone?apiKey=${API_KEY}&location=${searchTerm}`)
                     const timezoneData = response.data.timezone.replace(/_/g, " ")
-                    console.log(response);
-
                     setLocations([timezoneData])
                 } catch (error) {
                     console.error('Error fetching locations:', error)
@@ -38,9 +36,10 @@ export default function SearchBar({ onLocationSelect, initialLocation }) {
             } else {
                 setLocations([])
             }
-        }, 1000),//change to 300ms
+        }, 300),
         []
     )
+
     useEffect(() => {
         if (initialLocation) {
             setSearch(initialLocation)
@@ -110,7 +109,6 @@ export default function SearchBar({ onLocationSelect, initialLocation }) {
         </View>
     )
 }
-
 
 const styles = StyleSheet.create({
     container: {
