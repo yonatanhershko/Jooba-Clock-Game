@@ -7,8 +7,8 @@ import { useTranslation } from 'react-i18next'
 const screenWidth = Dimensions.get('window').width
 const screenHeight = Dimensions.get('window').height
 
-const CARD_WIDTH = screenWidth > 1000 ? 400 : screenWidth < 500 ? 210 : 0
-const VISIBLE_CARDS = screenWidth > 1000 ? 1.5 : screenWidth < 500 ? 1 : 0
+const CARD_WIDTH = screenWidth > 700 ? 400 : screenWidth < 500 ? 210 : 0
+const VISIBLE_CARDS = screenWidth > 700 ? 1.5 : screenWidth < 500 ? 1 : 0
 
 export default function WinsList({ wins, onDeleteWin }) {
   const { t } = useTranslation()

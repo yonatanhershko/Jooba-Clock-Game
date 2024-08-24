@@ -73,12 +73,12 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: '#ece6f0',
     padding: 30,
-    width: screenWidth > 1000 ? 350 : screenWidth < 500 ? 220 : 0,
+    width: screenWidth > 700 ? 350 : screenWidth < 500 ? 220 : 0,
     borderRadius: 14,
     marginTop: 20,
     marginBottom:20,
-    marginLeft:screenWidth > 1000 ? 15 : screenWidth < 500 ? 50 : 0,
-    paddingLeft: screenWidth > 1000 ? 29 : screenWidth < 500 ? 16 : 0,
+    marginLeft:screenWidth > 700 ? 15 : screenWidth < 500 ? 65 : 0,
+    paddingLeft: screenWidth > 700 ? 29 : screenWidth < 500 ? 16 : 0,
     height: screenHeight < 700 ? 200 : 200,
   },
   timeInputsContainer: {
@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
     color: '#21005d',
   },
   colon: {
-    fontSize:  screenWidth > 1000 ? 40 : screenWidth < 500 ? 28 : 0,
+    fontSize:  screenWidth > 700 ? 40 : screenWidth < 500 ? 28 : 0,
     fontWeight:'600',
     marginHorizontal: 5,
   },
@@ -139,7 +139,7 @@ const styles = StyleSheet.create({
   underInputsTxtContainer: {
     flex: 1,
     flexDirection: 'row',
-    width: screenWidth > 1000 ? '65%' : screenWidth < 500 ? '85%' : 0,
+    width: screenWidth > 700 ? '65%' : screenWidth < 500 ? '85%' : 0,
     justifyContent: 'space-between',
     marginBottom: 18,
   },

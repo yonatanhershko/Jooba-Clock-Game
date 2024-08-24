@@ -160,9 +160,9 @@ const styles = StyleSheet.create({
   mainPageContainer: {
     flex: 1,
     gap: 10,
-    flexDirection: screenWidth > 1000 ? 'row' : screenWidth < 500 ? 'column' : 0,
+    flexDirection: screenWidth > 700 ? 'row' : screenWidth < 500 ? 'column' : 0,
     justifyContent: 'space-around',
-    width: screenWidth > 1000 ? '60%' : screenWidth < 500 ? '100%' : 0,
+    width: screenWidth > 700 ? '60%' : screenWidth < 500 ? '100%' : 0,
     alignContent: 'center'
   },
   randomBtn: {
@@ -172,7 +172,7 @@ const styles = StyleSheet.create({
   },
   JoobaImg: {
     height: screenHeight < 700 ? 240 : 200,
-    width: screenWidth > 1000 ? 470 : screenWidth < 500 ? 340 : 0,
+    width: screenWidth > 700 ? 470 : screenWidth < 500 ? 340 : 0,
     resizeMode: 'contain',
     zIndex: -1,
   },
