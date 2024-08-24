@@ -1,3 +1,4 @@
+import 'intl-pluralrules'
 import React, { useEffect, useState } from 'react'
 import { FlatList, StyleSheet, View, Text, Alert, TouchableOpacity, Image, Dimensions } from 'react-native'
 import axios from 'axios'
@@ -193,6 +194,7 @@ const styles = StyleSheet.create({
     width: screenWidth > 700 ? 470 : screenWidth < 500 ? 340 : 0,
     resizeMode: 'contain',
     zIndex: -1,
+    marginTop:screenWidth > 700 ? 47 : screenWidth < 500 ? 0: 0,
   },
 
 })

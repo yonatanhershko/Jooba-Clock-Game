@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "MyNewApp",
-    "slug": "MyNewApp",
+    "name": "Jooba Game",
+    "slug": "jooba-game",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
