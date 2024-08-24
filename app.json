@@ -20,6 +20,9 @@
         "backgroundColor": "#ffffff"
       }
     },
+    "scripts": {
+      "start": "expo start"
+    },
     "web": {
       "favicon": "./assets/favicon.png"
     }
