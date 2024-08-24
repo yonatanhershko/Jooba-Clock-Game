@@ -111,7 +111,8 @@ const styles = StyleSheet.create({
     color: '#21005d',
   },
   colon: {
-    fontSize: 18,
+    fontSize:  screenWidth > 1000 ? 40 : screenWidth < 500 ? 28 : 0,
+    fontWeight:'600',
     marginHorizontal: 5,
   },
   btnsContainer: {
@@ -129,6 +130,7 @@ const styles = StyleSheet.create({
   },
   btnTxt: {
     color: '#65558f',
+    fontWeight:'600',
   },
   icon: {
     flex: 1,

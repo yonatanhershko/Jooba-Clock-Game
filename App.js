@@ -1,6 +1,6 @@
 import 'intl-pluralrules'
 import React, { useEffect, useState } from 'react'
-import { StyleSheet, View, Text, Alert, TouchableOpacity, I18nManager, Image, Dimensions } from 'react-native'
+import {  ScrollView,StyleSheet, View, Text, Alert, TouchableOpacity, I18nManager, Image, Dimensions } from 'react-native'
 import axios from 'axios'
 import Header from './components/Header.jsx'
 import SearchBar from './components/SearchBar.jsx'
@@ -95,6 +95,7 @@ export default function App() {
   }
 
   return (
+    <ScrollView contentContainerStyle={styles.scrollView}>
     <View style={styles.container}>
       <Header onInfoPress={toggleInfoModal} />
       <View style={styles.content}>
@@ -107,12 +108,12 @@ export default function App() {
         <SearchBar onLocationSelect={handleLocationSelect} initialLocation={randomLocation} />
 
         <View style={styles.mainPageContainer}>
-          <TimePicker onGuessSubmit={checkGuess}/>
+          <TimePicker onGuessSubmit={checkGuess} />
           <Image source={joobaImg} style={styles.JoobaImg} />
         </View>
       </View>
 
-      <WinList wins={wins} onDeleteWin={handleDeleteWin} />
+      <WinList wins={wins} onDeleteWin={handleDeleteWin} style={styles.winList} />
 
       <AnswerModal
         isVisible={modalVisible}
@@ -128,12 +129,16 @@ export default function App() {
 
 
     </View>
+    </ScrollView>
   )
 }
 const screenWidth = Dimensions.get('window').width
 const screenHeight = Dimensions.get('window').height
 
 const styles = StyleSheet.create({
+  scrollView: {
+    flexGrow: 1, // Ensures the scroll view takes up available space
+  },
   container: {
     flex: 1,
     backgroundColor: '#fff',
@@ -157,7 +162,7 @@ const styles = StyleSheet.create({
     gap: 10,
     flexDirection: screenWidth > 1000 ? 'row' : screenWidth < 500 ? 'column' : 0,
     justifyContent: 'space-around',
-    width: screenWidth > 1000 ? '70%' : screenWidth < 500 ? '100%' : 0,
+    width: screenWidth > 1000 ? '60%' : screenWidth < 500 ? '100%' : 0,
     alignContent: 'center'
   },
   randomBtn: {
@@ -166,8 +171,10 @@ const styles = StyleSheet.create({
     backgroundColor: '#f3edf7',
   },
   JoobaImg: {
-    height: screenHeight < 700 ? 320 : 200,
-    width: screenWidth > 1000 ? 600 : screenWidth < 500 ? 340 : 0,
+    height: screenHeight < 700 ? 240 : 200,
+    width: screenWidth > 1000 ? 470 : screenWidth < 500 ? 340 : 0,
+    resizeMode: 'contain',
     zIndex: -1,
   },
+
 })

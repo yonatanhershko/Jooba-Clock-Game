@@ -4,9 +4,11 @@ import AntDesign from '@expo/vector-icons/AntDesign'
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5'
 import { TouchableOpacity } from 'react-native'
 import { useTranslation } from 'react-i18next'
+const screenWidth = Dimensions.get('window').width
+const screenHeight = Dimensions.get('window').height
 
-const CARD_WIDTH = 210
-const VISIBLE_CARDS = 1
+const CARD_WIDTH = screenWidth > 1000 ? 400 : screenWidth < 500 ? 210 : 0
+const VISIBLE_CARDS = screenWidth > 1000 ? 1.5 : screenWidth < 500 ? 1 : 0
 
 export default function WinsList({ wins, onDeleteWin }) {
   const { t } = useTranslation()
@@ -88,6 +90,7 @@ const styles = StyleSheet.create({
     borderColor: '#f0f0f0',
     position: 'relative',
     width: CARD_WIDTH,
+    height: screenHeight < 700 ? 90 : 70,
   },
   closeIcon: {
     position: 'absolute',
