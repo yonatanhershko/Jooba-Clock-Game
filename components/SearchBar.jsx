@@ -18,7 +18,7 @@ export default function SearchBar({ onLocationSelect, initialLocation }) {
     const [isDropdownVisible, setIsDropdownVisible] = useState(false)
     const animatedHeight = useRef(new Animated.Value(0)).current
     const { t } = useTranslation()
-
+    
     const debouncedFetchLocations = useCallback(
         debounce(async (searchTerm) => {
             if (searchTerm.length > 2) {
