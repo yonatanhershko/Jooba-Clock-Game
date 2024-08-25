@@ -6,14 +6,18 @@
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
-    "web": "expo start --web"
+    "web": "expo start --web",
+    "build:web": "expo build:web",
+    "predeploy": "yarn build:web",
+    "deploy": "gh-pages -d web-build",
+    "eject": "expo eject"
   },
   "dependencies": {
     "@expo/vector-icons": "^14.0.2",
-    "@react-native-async-storage/async-storage": "^2.0.0",
+    "@react-native-async-storage/async-storage": "1.23.1",
     "axios": "^1.7.4",
     "expo": "~51.0.28",
-    "expo-router": "^3.5.23",
+    "expo-router": "~3.5.23",
     "expo-status-bar": "~1.12.1",
     "i18next": "^23.14.0",
     "intl-pluralrules": "^2.0.1",
@@ -26,7 +30,7 @@
     "react-native-web": "~0.19.10"
   },
   "devDependencies": {
-    "@babel/core": "^7.20.0",
+    "@babel/core": "^7.24.0",
     "gh-pages": "^6.1.1"
   },
   "private": true

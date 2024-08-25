@@ -15,11 +15,9 @@ const INITIAL_LOCATIONS = [
 export default function SearchBar({ onLocationSelect, initialLocation }) {
     const [search, setSearch] = useState('')
     const [locations, setLocations] = useState([])
-    const [selectedLocation, setSelectedLocation] = useState(null)
     const [isDropdownVisible, setIsDropdownVisible] = useState(false)
     const animatedHeight = useRef(new Animated.Value(0)).current
     const { t } = useTranslation()
-
 
     const debouncedFetchLocations = useCallback(
         debounce(async (searchTerm) => {
@@ -42,14 +40,13 @@ export default function SearchBar({ onLocationSelect, initialLocation }) {
             } else {
                 setLocations([''])
             }
-        }, 300),
+        }, 700),
         []
     )
 
     useEffect(() => {
         if (initialLocation) {
             setSearch(initialLocation)
-            setSelectedLocation(initialLocation)
             onLocationSelect(initialLocation)
         }
     }, [initialLocation])
@@ -68,7 +65,6 @@ export default function SearchBar({ onLocationSelect, initialLocation }) {
     }, [isDropdownVisible])
 
     function handleLocationSelect(location) {
-        setSelectedLocation(location)
         onLocationSelect(location)
         setSearch(location)
         setIsDropdownVisible(false)
@@ -76,7 +72,6 @@ export default function SearchBar({ onLocationSelect, initialLocation }) {
 
     function clearSearch() {
         setSearch('')
-        setSelectedLocation(null)
         setLocations(INITIAL_LOCATIONS)
     }
 

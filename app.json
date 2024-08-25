@@ -21,13 +21,6 @@
         "backgroundColor": "#ffffff"
       }
     },
-    "scripts": {
-      "start": "expo start",
-      "build": "expo build:web",
-      "predeploy": "yarn build",
-      "deploy": "gh-pages -d web-build",
-      "eject": "expo eject"
-    },
     "web": {
       "favicon": "./assets/favicon.png"
     }
