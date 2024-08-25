@@ -61,7 +61,7 @@ export default function App() {
       const data = response.data
       const currentTime = data.time_24
 
-      const [guessedHour, guessedMinute] = guessedTime.split(':').map(Number)
+      const [guessedHour, guessedMinute] = guessedTime.split(':').map(Number)//Destructure
       const [currentHour, currentMinute] = currentTime.split(':').map(Number)
 
       if (currentHour === guessedHour && currentMinute === guessedMinute) {

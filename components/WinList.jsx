@@ -37,7 +37,7 @@ export default function WinsList({ wins, onDeleteWin }) {
     <View style={styles.container}>
       <Text style={i18n.language === 'he' ? styles.titleRTL : styles.title}>{t('WinList.win')}</Text>
       <View style={styles.scrollContainer}>
-        
+
         <TouchableOpacity onPress={scrollLeft} style={styles.arrowButton}>
           <FontAwesome5 name="arrow-left" size={24} color="black" />
         </TouchableOpacity>
@@ -62,7 +62,7 @@ export default function WinsList({ wins, onDeleteWin }) {
 
               <Text style={i18n.language === 'he' ? styles.timeTextRTL : styles.timeText}>
                 {t('WinList.time')}: {win.time}</Text>
-              
+
               <Text style={i18n.language === 'he' ? styles.timezoneRTL : styles.timezone}>{t('WinList.location')}: {win.location}</Text>
             </View>
           ))}
@@ -85,11 +85,11 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 10,
   },
-  titleRTL:{
+  titleRTL: {
     fontSize: 18,
     fontWeight: 'bold',
     marginBottom: 10,
-    textAlign:'right',
+    textAlign: 'right',
   },
   scrollContainer: {
     flexDirection: 'row',
@@ -128,7 +128,7 @@ const styles = StyleSheet.create({
     marginBottom: 5,
     textAlign: 'right',
   },
-  timezoneRTL:{
+  timezoneRTL: {
     textAlign: 'right',
   },
   arrowButton: {
