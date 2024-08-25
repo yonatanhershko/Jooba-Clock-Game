@@ -41,6 +41,7 @@ export default function SearchBar({ onLocationSelect, initialLocation }) {
                 setLocations([''])
             }
         }, 700),
+        }, 700),
         []
     )
 
