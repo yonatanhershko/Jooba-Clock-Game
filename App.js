@@ -67,10 +67,10 @@ export default function App() {
       if (currentHour === guessedHour && currentMinute === guessedMinute) {
         setIsCorrect(true)
         const newWins = [...wins, { time: guessedTime, location: selectedLocation }]
-        setWins(newWins)
+        setWins(newWins)//new ->wins
         saveWins(newWins)
       } else {
-        setIsCorrect(false)
+        setIsCorrect(false)//modal ans
         setCorrectTime(`${currentHour.toString().padStart(2, '0')}:${currentMinute.toString().padStart(2, '0')}`)
       }
       setModalVisible(true)
