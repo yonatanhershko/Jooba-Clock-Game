@@ -1,6 +1,6 @@
 # 🕒 Jooba-Clock-Game
 
-**Jooba-Clock-Game** is a fun game where you guess the time of a specific location. 🕰️ If you're right, it gets added to your win list! 🎉
+**Jooba-Clock-Game** is a fun game created with React Native where you guess the time of a specific location. 🕰️ If you're right, it gets added to your win list! 🎉
 
 
 
